@@ -1,16 +1,16 @@
+import { fileURLToPath, URL } from 'node:url'
+import Vue from '@vitejs/plugin-vue'
 // Plugins
 import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
 import Fonts from 'unplugin-fonts/vite'
-import Layouts from 'vite-plugin-vue-layouts-next'
-import Vue from '@vitejs/plugin-vue'
-import VueRouter from 'unplugin-vue-router/vite'
+import Components from 'unplugin-vue-components/vite'
 import { VueRouterAutoImports } from 'unplugin-vue-router'
-import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
-
+import VueRouter from 'unplugin-vue-router/vite'
 // Utilities
 import { defineConfig } from 'vite'
-import { fileURLToPath, URL } from 'node:url'
+
+import Layouts from 'vite-plugin-vue-layouts-next'
+import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -30,10 +30,12 @@ export default defineConfig({
     Components(),
     Fonts({
       google: {
-        families: [{
-          name: 'Roboto',
-          styles: 'wght@100;300;400;500;700;900',
-        }],
+        families: [
+          {
+            name: 'Roboto',
+            styles: 'wght@100;300;400;500;700;900',
+          },
+        ],
       },
     }),
     AutoImport({
@@ -50,6 +52,7 @@ export default defineConfig({
       vueTemplate: true,
     }),
   ],
+
   optimizeDeps: {
     exclude: [
       'vuetify',
@@ -59,24 +62,34 @@ export default defineConfig({
       'unplugin-vue-router/data-loaders/basic',
     ],
   },
+
   define: { 'process.env': {} },
+
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('src', import.meta.url)),
     },
-    extensions: [
-      '.js',
-      '.json',
-      '.jsx',
-      '.mjs',
-      '.ts',
-      '.tsx',
-      '.vue',
-    ],
+    extensions: ['.js', '.json', '.jsx', '.mjs', '.ts', '.tsx', '.vue'],
   },
+
   server: {
-    port: 3000,
+    host: '127.0.0.1',
+    port: 3001,
+    proxy: {
+      '/giantbomb': {
+        target: 'https://www.giantbomb.com/api',
+        changeOrigin: true,
+        secure: false,
+        rewrite: path => path.replace(/^\/giantbomb/, ''),
+
+        // Required by GiantBomb
+        headers: {
+          'User-Agent': 'VueStudentProject/1.0',
+        },
+      },
+    },
   },
+
   css: {
     preprocessorOptions: {
       sass: {

@@ -41,7 +41,7 @@ src/
 ├── stores/            # Pinia stores for state management
 │   ├── pokemonStore.js # Main Pokémon data and functionality
 │   ├── authStore.js   # Authentication simulation
-│   └── index.js       # Store configuration
+│   └── api.js       # Store configuration
 ├── plugins/           # Plugin configuration
 │   ├── index.js       # Plugin registration
 │   ├── vuetify.js     # Vuetify configuration
