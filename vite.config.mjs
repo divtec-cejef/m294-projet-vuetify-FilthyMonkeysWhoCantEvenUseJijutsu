@@ -77,15 +77,11 @@ export default defineConfig({
     port: 3001,
     proxy: {
       '/giantbomb': {
-        target: 'https://www.giantbomb.com/api',
+        target: 'https://www.giantbomb.com/api/',
         changeOrigin: true,
         secure: false,
         rewrite: path => path.replace(/^\/giantbomb/, ''),
-
-        // Required by GiantBomb
-        headers: {
-          'User-Agent': 'VueStudentProject/1.0',
-        },
+        headers: { 'User-Agent': 'VueStudentProject/1.0' },
       },
     },
   },
