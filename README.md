@@ -137,7 +137,7 @@ Utilisateur → action (clic, recherche) → store Pinia → requête API → re
 | Structuration du projet | 40 %         |
 | Génération de snippets Vue/Vuetify | 50 %         |
 | Aide sur Axios & Pinia | 40 %         |
-| Rédaction de la documentation | 55 %         |
+| Rédaction de la documentation | 60 %         |
 
 ### Compréhension et adaptation
 Le code généré a été adapté manuellement pour correspondre à l’API GiantBomb et aux besoins du projet,

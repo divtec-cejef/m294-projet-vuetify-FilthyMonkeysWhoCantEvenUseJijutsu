@@ -1,123 +1,69 @@
 <template>
-  <v-footer class="steam-footer pa-8">
-    <v-container>
-      <v-row class="mb-6" justify="space-between">
-        <!-- Column 1: Company / About -->
-        <v-col cols="12" md="3">
-          <h3 class="footer-title">Vapor</h3>
-          <v-list dense>
-            <v-list-item>
-              <v-list-item-content>
-                <RouterLink class="footer-link" to="/about">À propos</RouterLink>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item>
-              <v-list-item-content>
-                <RouterLink class="footer-link" to="/wishlist">Favoris</RouterLink>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
-        </v-col>
+  <!-- Pied de page principal -->
+  <v-footer class="pretty-footer py-6">
+    <v-container class="text-center">
 
-        <!-- Column 2: Support / Links -->
-        <v-col cols="12" md="3">
-          <h3 class="footer-title">Support</h3>
-          <v-list dense>
-            <v-list-item>
-              <v-list-item-content>
-                <RouterLink class="footer-link" to="/contact">Contact</RouterLink>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item>
-              <v-list-item-content>
-                <RouterLink class="footer-link" to="/faq">FAQ</RouterLink>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
-        </v-col>
+      <!-- Liens vers les réseaux sociaux -->
+      <div class="socials mb-2">
+        <span class="label">Socials :</span>
+        <a class="social-link" href="https://github.com" target="_blank">GitHub</a>
+        <a class="social-link" href="https://twitter.com" target="_blank">Twitter</a>
+        <a class="social-link" href="https://discord.com" target="_blank">Discord</a>
+      </div>
 
-        <!-- Column 3: Social -->
-        <v-col class="d-flex flex-column" cols="12" md="3">
-          <h3 class="footer-title">Follow us</h3>
-          <div class="d-flex gap-4 mt-2">
-            <v-btn
-              class="text-white"
-              href="https://github.com/johndoe"
-              icon
-              target="_blank"
-              variant="text"
-            >
-              <v-icon>mdi-github</v-icon>
-            </v-btn>
-            <v-btn
-              class="text-white"
-              href="https://twitter.com/yourprofile"
-              icon
-              target="_blank"
-              variant="text"
-            >
-              <v-icon>mdi-twitter</v-icon>
-            </v-btn>
-            <v-btn
-              class="text-white"
-              href="https://discord.gg/yourinvite"
-              icon
-              target="_blank"
-              variant="text"
-            >
-              <v-icon>mdi-discord</v-icon>
-            </v-btn>
-          </div>
-        </v-col>
-      </v-row>
+      <!-- Mentions légales -->
+      <div class="text-muted text-body-2">
+        © {{ new Date().getFullYear() }} Vapor — Tous droits réservés.
+      </div>
 
-      <!-- Divider -->
-      <v-divider class="my-4" color="rgba(255,255,255,0.1)" />
-
-      <!-- Legal / copyright -->
-      <v-row justify="center">
-        <v-col class="text-center text-white text-body-2" cols="12">
-          © {{ new Date().getFullYear() }} Vapor. All rights reserved.
-        </v-col>
-      </v-row>
     </v-container>
   </v-footer>
 </template>
 
 <script setup>
-  import { RouterLink } from 'vue-router'
+// Composant purement visuel
 </script>
 
 <style scoped>
-.steam-footer {
-  background-color: #1b1b1b;
+/* Style général du footer */
+.pretty-footer {
+  background: radial-gradient(circle at top, #191a1f, #0e0e12 70%);
   color: white;
-  backdrop-filter: blur(6px);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
+  text-align: center;
 }
 
-.footer-title {
-  font-weight: bold;
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
-}
-
-.footer-link {
+/* Libellé "Socials" */
+.label {
   color: rgba(255, 255, 255, 0.7);
+  margin-right: 8px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* Liens sociaux */
+.social-link {
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 6px;
   text-decoration: none;
-  transition: color 0.2s;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+  font-weight: 500;
 }
 
-.footer-link:hover {
-  color: white;
+.social-link:hover {
+  color: #66aaff;
+  text-shadow: 0 0 6px rgba(102, 170, 255, 0.5);
 }
 
-.v-btn > .v-icon {
-  font-size: 20px;
-  transition: color 0.2s;
+/* Texte des mentions légales */
+.text-muted {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.9rem;
 }
 
-.v-btn:hover > .v-icon {
-  color: #1da1f2; /* subtle glow on hover */
+/* Marges pour la ligne des réseaux sociaux */
+.socials {
+  margin-bottom: 6px;
 }
 </style>

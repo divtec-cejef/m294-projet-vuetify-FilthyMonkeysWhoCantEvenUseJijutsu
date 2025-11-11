@@ -8,10 +8,14 @@
     />
     <h1>{{ game.name }}</h1>
     <div class="mb-4" v-html="game.description || 'Aucune description disponible.'" />
-    <v-btn class="mr-2" color="primary" @click="toggleFavorite(game)">
+    <v-btn
+      class="mr-2 text-white"
+      :color="store.favorites.some(f => f.id === game.id) ? 'red-darken-1' : 'primary'"
+      @click="toggleFavorite(game)"
+    >
       {{ store.favorites.some(f => f.id === game.id)
-        ? 'Retirer des favoris'
-        : 'Ajouter aux favoris' }}
+      ? 'Retirer des favoris'
+      : 'Ajouter aux favoris' }}
     </v-btn>
     <v-btn color="secondary" @click="$router.push('/')">
       Retour au catalogue

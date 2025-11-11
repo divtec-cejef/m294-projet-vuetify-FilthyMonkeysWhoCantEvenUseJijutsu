@@ -1,5 +1,8 @@
 <template>
+  <!-- Ligne de filtres et tri -->
   <v-row align="center" class="mb-4">
+
+    <!-- Filtre par genre -->
     <v-col cols="12" md="3">
       <v-select
         v-model="filters.genre"
@@ -9,6 +12,7 @@
       />
     </v-col>
 
+    <!-- Filtre par plateforme -->
     <v-col cols="12" md="3">
       <v-select
         v-model="filters.platform"
@@ -18,6 +22,7 @@
       />
     </v-col>
 
+    <!-- Filtre par année -->
     <v-col cols="12" md="3">
       <v-select
         v-model="filters.year"
@@ -27,12 +32,14 @@
       />
     </v-col>
 
+    <!-- Bouton de tri -->
     <v-col cols="12" md="3">
       <v-btn color="secondary" variant="elevated" @click="$emit('toggle-sort')">
         Trier: {{ sortOrder === 'asc' ? 'A → Z' : 'Z → A' }}
       </v-btn>
     </v-col>
 
+    <!-- Barre de recherche -->
     <v-col cols="12">
       <v-text-field
         v-model="filters.search"
@@ -41,16 +48,20 @@
         prepend-inner-icon="mdi-magnify"
       />
     </v-col>
+
   </v-row>
 </template>
 
 <script setup>
+/* Props reçues du parent */
   defineProps({
-    filters: Object,
-    genres: Array,
-    platforms: Array,
-    years: Array,
-    sortOrder: String,
+    filters: Object, // Objets contenant genre, platform, year et search
+    genres: Array, // Liste des genres disponibles
+    platforms: Array, // Liste des plateformes disponibles
+    years: Array, // Liste des années disponibles
+    sortOrder: String, // Ordre actuel du tri
   })
+
+  /* Événement pour inverser le tri */
   defineEmits(['toggle-sort'])
 </script>
