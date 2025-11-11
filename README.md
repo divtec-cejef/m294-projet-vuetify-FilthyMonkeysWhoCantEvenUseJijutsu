@@ -1,22 +1,29 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/EBdR9AYf)
 # 🌐 Mon Projet Vue.js & Vuetify
 
 ## 1. 🎨 Présentation du projet
 
 ### Concept
-- API choisie et pourquoi  
-- Public cible  
-- Objectifs de l’application  
+**API choisie :** [GiantBomb API](https://www.giantbomb.com/api/)  
+**Pourquoi :** cette API propose une base de données complète sur les jeux vidéo — titres, plateformes, images, descriptions, notes, etc. Elle est idéale pour créer une application de type “Vapor” (inspirée de Steam) permettant d’explorer et de gérer des jeux favoris.
+
+**Public cible :**  
+Les joueurs et curieux qui souhaitent consulter les fiches de jeux, découvrir des nouveautés et sauvegarder leurs favoris.
+
+**Objectifs de l’application :**  
+Créer une web app fluide et moderne où l’utilisateur peut :
+- Parcourir un catalogue de jeux vidéo via GiantBomb
+- Rechercher et filtrer les résultats
+- Accéder à la fiche détaillée d’un jeu
+- Gérer une “wishlist” persistante
 
 ### Fonctionnalités principales
-- Affichage d’une liste d’éléments (via API)
-- Recherche / Tri / Filtres
-- Vue détail
-- Fonctionnalité interactive (favoris, watchlist, paramètres…)
-- Persistance locale (favoris ou préférences)
+- ✅ Liste dynamique de jeux vidéo (via GiantBomb API)
+- 🔎 Recherche et filtres par nom ou plateforme
+- 📄 Vue détail (image, résumé, date, genre, etc.)
+- ⭐ Ajout / suppression de jeux dans la **wishlist**
+- 💾 Persistance locale (localStorage via Pinia)
 
 ### Aperçu visuel
-_(Capture d’écran de l’application)_  
 `![Screenshot de l’application](img/screenshot.png)`
 
 ---
@@ -28,145 +35,161 @@ _(Capture d’écran de l’application)_
 - [Vue 3 Docs](https://vuejs.org/guide/introduction.html)
 - [Vuetify Docs](https://vuetifyjs.com/en/components/all/)
 - [Pinia Docs](https://pinia.vuejs.org/)
-- [Public APIs List](https://github.com/public-apis/public-apis)
-- Autres ressources...
+- [Axios Docs](https://axios-http.com/)
+- [GiantBomb API](https://www.giantbomb.com/api/)
+- Autres : tutoriels YouTube & StackOverflow
 
 #### Progression
-- Semaine 1 : ...
-- Semaine 2 : ...
-- Semaine 3 : ...
-- Semaine 4 : ...
-- ...
+- **Semaine 1 :** installation du projet, intégration de Vuetify
+- **Semaine 2 :** configuration de l’API GiantBomb avec Axios
+- **Semaine 3 :** création des composants principaux (`Gamecard`, `Gamefilters`)
+- **Semaine 4 :** ajout de la page de détails et de la persistance wishlist
+- **Semaine 5 :** design final, tests et corrections
 
 ---
 
 ## 3. 🛠️ Outils et méthodologie
 
 ### Environnement de développement
-- **IDE** : VS Code / WebStorm / Autre
-- **Versioning** : Git + GitHub
-- **Dépendances principales** : Vue 3, Vuetify 3, Pinia, Axios/Fetch
-- **Gestion API Keys** : `.env` + `.env.example`
+- **IDE :** Visual Studio Code
+- **Versioning :** Git + GitHub Classroom
+- **Dépendances principales :** Vue 3, Vuetify 3, Pinia, Axios
+- **Gestion API Keys :** `.env` + `.env.example`
+  ```bash
+  VITE_GIANTBOMB_API_KEY=ta_cle_api
+  VITE_API_BASE_URL=https://www.giantbomb.com/api/
+  ```
 
 ### Installation & Run
-- Cloner le repo :...
-- Installer :... 
-- Lancer :...
-- Variables d’environnement : copier `.env.example` → `.env` et compléter les clés nécessaires  
+```bash
+git clone <repo>
+cd projet-vapor
+npm install
+npm run dev
+```
 
 ### Méthodologie
-- Découpage en composants réutilisables
-- Props & Emits clairs
-- Store global avec Pinia
+- Composants réutilisables (`Gamecard`, `Gamefilters`, `AppFooter`)
+- Communication par **props/emits** entre vues et composants
+- **Pinia** pour la gestion du store global (favoris, chargement)
+- **Axios** pour les appels API centralisés dans `plugins/api.js`
 - Commits réguliers et explicites
-- Tests manuels (UI, persistance, erreurs API)
-- ...
+- Tests manuels (recherche, persistance, navigation, erreurs)
 
 ### Choix techniques
-- API sélectionnée :  
-- Justification du choix :  
-- Endpoints utilisés :  
-- Limites/quotas connus :  
+- **API sélectionnée :** GiantBomb
+- **Endpoints utilisés :**
+    - `/games` → liste principale
+    - `/game/{id}` → détails
+- **Justification :** base de données riche, gratuite et adaptée à un usage pédagogique
+- **Limites :** nécessite un proxy ou clé API (quotas d’environ 200 requêtes/jour)
 
-### Architecture (Descriptif + schéma simple + data-flow)
-- `App.vue` : layout principal  
-- `views/` : pages (liste, détail, favoris)  
-- ...
-Outils utiles : Figma / Draw.io / ...
+### Architecture
+- `App.vue` : structure principale et layout
+- `views/` : pages (`index.vue`, `Details.vue`, `Wishlist.vue`)
+- `components/` : cartes, filtres, footer, etc.
+- `stores/` : gestion d’état global (wishlist, chargement, erreurs)
+- `plugins/api.js` : configuration Axios + clé GiantBomb
 
 **Data-flow résumé :**  
-- Vue déclenche un **event utilisateur** → composant appelle une fonction du **store** → ...
+Utilisateur → action (clic, recherche) → store Pinia → requête API → rendu des données → persistance locale.
 
 ---
 
 ## 4. 🧪 Tests et validation
 
 ### Tests techniques
-- ✅ Appels API fonctionnels  
-- ✅ Persistance vérifiée après refresh (localStorage)  
-- ✅ Navigation entre les vues OK  
-- ...
+- ✅ Appels API GiantBomb fonctionnels
+- ✅ Persistance locale testée après refresh
+- ✅ Navigation fluide entre liste/détail/wishlist
+- ✅ Gestion des erreurs API
 
 ### Tests d’UX
-- Navigation intuitive  
-- Recherche/filtre/tri faciles à comprendre  
-- Feedback utilisateur (loading, erreurs, vide)  
-- ...
+- Navigation intuitive
+- Recherche fluide et réactive
+- Feedback utilisateur (loading spinner, erreurs, vide)
+- Wishlist simple à utiliser
 
 ### Tests d’accessibilité
-- Contraste couleurs (Vuetify par défaut)  
-- Labels et placeholders corrects  
-- Navigation clavier possible  
-- Focus visible  
-- ...
+- Contraste correct via Vuetify
+- Navigation clavier possible
+- Focus visible sur les éléments interactifs
+- Champs de saisie avec labels
 
 ### Tests d’erreurs & fallback
-- API down → **mock fallback** affiché (fichier local ou données simulées)  
-- Liste vide → message clair affiché  
-- Recherche sans résultat → affichage “Aucun élément trouvé”  
-- ...
+- API injoignable → message d’erreur clair
+- Liste vide → “Aucun jeu trouvé”
+- Recherche invalide → affichage par défaut
+- Données corrompues → message explicite
 
 ---
 
 ## 5. 🤖 Usage d’intelligence artificielle
 
-**⚠️ TRANSPARENCE OBLIGATOIRE** : Si vous utilisez une IA, vous DEVEZ :
-
 ### IA utilisée
-- **Nom** : ChatGPT / Claude / GitHub Copilot / Autre  
-- **Version** : _(ex. GPT-4)_  
-- **Contexte** : Aide ponctuelle / Génération de code / Debugging  
+- **Nom :** ChatGPT
+- **Version :** GPT-5
+- **Contexte :** aide ponctuelle pour la documentation et le débogage
 
 ### Utilisation détaillée
-**Domaines d'aide :**
-- Aide au code général : X%
-- Génération de snippets Vue/Vuetify : X%  
-- Aide à la structuration du projet : X%
-- Debugging : X%  
-- Recherche d’idées : X%  
+| Domaine | Usage estimé |
+|----------|--------------|
+| Structuration du projet | 40 %         |
+| Génération de snippets Vue/Vuetify | 50 %         |
+| Aide sur Axios & Pinia | 40 %         |
+| Rédaction de la documentation | 55 %         |
 
-**Compréhension et adaptation**
-- Expliquer ce que fait le code généré  
-- Dire comment il a été adapté au projet  
+### Compréhension et adaptation
+Le code généré a été adapté manuellement pour correspondre à l’API GiantBomb et aux besoins du projet,
+la génération était donc plus pour gagner du temps.
 
 ### Parties codées manuellement
-- Composants principaux : X% personnel  
-- Store & persistance : X% personnel  
-- Routing & navigation : X% personnel  
-- Tests & validation : 100% personnel  
+- Composants principaux : 80 %
+- Store & persistance : 70 %
+- Routing & navigation : 70 %
+- Tests & validation : 90 %
 
 ### Apprentissage personnel
-- Ce que j’ai appris grâce à l’IA  
-- Comment elle m’a aidé à progresser  
+- Utiliser une API complexe avec Axios et Vue
+- Gérer un store global et la persistance locale
+- Maîtriser Vuetify pour un rendu professionnel
+- Adapter une API tierce à une architecture Vue 3
 
 ---
 
 ## 6. 🎯 Bilan personnel
 
 ### Ce que j’ai appris
-- Compétences techniques acquises  
-- Découvertes surprenantes  
-- Concepts difficiles maîtrisés  
+- Gestion des appels API externes (GiantBomb)
+- Architecture d’une SPA avec Vue + Pinia
+- Design UI cohérent avec Vuetify
+- Meilleure compréhension du data-flow Vue
 
 ### Difficultés rencontrées
-- Problèmes techniques et solutions trouvées  
-- Moments de blocage et dépassement  
-- Aide reçue et sources  
+- Authentification et gestion de la clé API
+- Récupération et formatage des données JSON GiantBomb
+- Filtres et recherche multi-critères
+- Manipulation des composants Vuetify dynamiques
 
 ### Réussites et fiertés
-- Aspects du projet dont je suis fier  
-- Progrès constatés depuis le début  
-- Envies de développement futur  
+- Application complète et fluide
+- Interface élégante et responsive
+- Wishlist fonctionnelle et persistante
+- Bonne intégration entre API, UI et store
 
 ### Améliorations possibles
-- Ce que j’ajouterais avec plus de temps  
-- Fonctionnalités bonus envisagées  
-- Compétences à approfondir  
+- Tri par note ou date
+- Infinite scroll / pagination
+- Affichage des plateformes et genres sous forme de tags
+- Mode sombre / clair basculable
 
 ---
 
 ## 7. 📚 Références & Sources
-- Documentation de l’API : [Nom de l’API](https://...)  
-- Tutos clés utilisés : ...  
-- Usage de l’IA : voir section ci-dessus  
-- Autres ressources utiles : ...
+- [GiantBomb API Docs](https://www.giantbomb.com/api/documentation)
+- [Vue 3 Docs](https://vuejs.org/)
+- [Vuetify 3 Docs](https://vuetifyjs.com/)
+- [Pinia](https://pinia.vuejs.org/)
+- [Axios](https://axios-http.com/)
+- Tutoriels : Vue Mastery, Net Ninja, OpenClassrooms
+- Usage IA : ChatGPT

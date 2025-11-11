@@ -1,15 +1,14 @@
 <template>
   <v-app class="app-background">
+    <!-- App Bar -->
     <v-app-bar color="primary" elevate-on-scroll>
       <v-container class="d-flex align-center">
-        <!-- bind logo for navbar -->
-        <v-img
-          class="mr-2"
-          max-width="40"
-          :src="logo"
-        />
-        <v-toolbar-title class="text-white font-weight-bold">
-          Vapor
+        <!-- 🔗 Make the entire title block (logo + text) clickable -->
+        <v-toolbar-title class="p-0 m-0">
+          <RouterLink class="d-flex align-center text-decoration-none" to="/">
+            <v-img class="mr-2" max-width="40" :src="logo" />
+            <span class="text-white font-weight-bold text-h6">Vapor</span>
+          </RouterLink>
         </v-toolbar-title>
 
         <v-spacer />
@@ -20,22 +19,25 @@
       </v-container>
     </v-app-bar>
 
+    <!-- Main content -->
     <v-main>
       <router-view />
     </v-main>
+
+    <!-- Steam-style Footer -->
+    <AppFooter />
   </v-app>
 </template>
 
 <script setup>
   import { onMounted } from 'vue'
+  import { RouterLink } from 'vue-router'
   import logo from '@/assets/Vapor-logo.png'
+  import AppFooter from '@/components/AppFooter.vue' // <-- import the footer
   import { useAppStore } from '@/stores/app.js'
 
   const store = useAppStore()
-
-  onMounted(() => {
-    store.init()
-  })
+  onMounted(() => store.init())
 </script>
 
 <style scoped>
@@ -54,5 +56,15 @@
   color: white !important;
   border-radius: 12px;
   backdrop-filter: blur(6px);
+}
+
+/* Toolbar link styling */
+a {
+  text-decoration: none;
+}
+
+.v-toolbar-title a:hover {
+  opacity: 0.8;
+  transition: opacity 0.2s;
 }
 </style>
